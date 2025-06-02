@@ -22,10 +22,10 @@ jobs:
      - name: Build Code
        run: dotnet build --configuration Release
      - name: Publish Code
-       run: dotnet publish -c Release --property:PublishDir="${{env.DOTNET_ROOT}}\myapp"
+       run: dotnet publish -c Release --property:PublishDir="${{env.DOTNET_ROOT}}/myapp"
      - name: Upload Artifact
        uses: actions/upload-artifact@v4
        with:
           # Artifact name
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}\myapp
+          path: ${{env.DOTNET_ROOT}}/myapp
