@@ -2,7 +2,7 @@ name: build-deploy-dotnet
 on: 
   push:
    paths:
-     - ".github/workflows/build-and-deploy.yml"
+     - ".github/workflows/build-and-callresusable-deploy.yml"
      - "./demo-app/**"
   workflow_dispatch: #Manual_Trigger
 permissions:
