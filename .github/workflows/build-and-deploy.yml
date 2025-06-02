@@ -14,9 +14,9 @@ jobs:
       working-directory: ./demo-app
    steps:
      - name: check repository
-       uses: actions/checkout@v4
+       uses: actions/checkout@v4.1.7
      - name: setup dotnet core
-       uses: actions/setup-dotnet@v4
+       uses: actions/setup-dotnet@v4.0.1
        with:
          dotnet-version: '8.x'
      - name: Build Code
