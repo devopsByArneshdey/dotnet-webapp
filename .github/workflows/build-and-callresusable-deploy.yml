@@ -31,15 +31,14 @@ jobs:
           # Artifact name
           name: net-app-${{ runner.os }}
           path: ${{env.DOTNET_ROOT}}/myapp
+     - name: Set package_name variable
+       id: vars
+       run: echo "package_name=net-app-${{ runner.os }}" >> $GITHUB_OUTPUT
   call-resusable-build-deploy:
     needs: build-create
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set package_name variable
-        id: vars
-        run: echo "package_name=net-app-${{ runner.os }}" >> $GITHUB_OUTPUT
-      - uses: devopsByArneshdey/Actions-Practice_Repo/.github/workflows/resusable-buildtest.yml@shared-wfl
-        with:
-         package_name: ${{ steps.vars.outputs.package_name }}
-         app-name: myapp1
-         deployment-slot: development-phase
+    
+    uses: devopsByArneshdey/Actions-Practice_Repo/.github/workflows/resusable-buildtest.yml@shared-wfl
+    with:
+      package_name: ${{ steps.vars.outputs.package_name }}
+      app-name: myapp1
+      deployment-slot: development-phase
