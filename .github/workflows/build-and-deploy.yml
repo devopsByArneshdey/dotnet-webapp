@@ -5,6 +5,8 @@ on:
      - ".github/workflows/build-and-deploy.yml"
      - "./demo-app/**"
   workflow_dispatch: #Manual_Trigger
+permissions:
+  contents: write 
   
 jobs:
   build-create:
