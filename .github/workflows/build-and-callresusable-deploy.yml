@@ -16,7 +16,7 @@ jobs:
       working-directory: ./demo-app
    steps:
      - name: check repository
-       uses: actions/checkout@v4.1.7
+       uses: actions/checkout@v4
      - name: setup dotnet core
        uses: actions/setup-dotnet@v4.0.1
        with:
@@ -29,16 +29,14 @@ jobs:
        uses: actions/upload-artifact@v4
        with:
           # Artifact name
-          name: net-app-${{ runner.os }}
+          name: dotnet-app
           path: ${{env.DOTNET_ROOT}}/myapp
-     - name: Set package_name variable
-       id: vars
-       run: echo "package_name=net-app-${{ runner.os }}" >> $GITHUB_OUTPUT
+
   call-resusable-build-deploy:
     needs: build-create
     
     uses: devopsByArneshdey/Actions-Practice_Repo/.github/workflows/resusable-buildtest.yml@shared-wfl
     with:
-      package_name: ${{ steps.vars.outputs.package_name }}
+      package_name: dotnet-app
       app-name: myapp1
       deployment-slot: development-phase
