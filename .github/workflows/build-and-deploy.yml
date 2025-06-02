@@ -33,16 +33,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-create
     env:
-      package_name: net-app-${{ runner.os }}
+     # package_name: net-app-${{ runner.os }}
       app-name: myapp1
       deployment-slot: Production
     steps:
+      - name: Set package_name variable
+        id: vars
+        run: echo "package_name=net-app-${{ runner.os }}" >> $GITHUB_OUTPUT
       - name: Download Artifact for build job
         uses: actions/download-artifact@v4
         with:
           # Artifact name
-          name: ${{ env.package_name}}
-          path: ${{env.DOTNET_ROOT}}/myapp
+          name: ${{ steps.vars.outputs.package_name}}
+          path: ${{ env.DOTNET_ROOT }}/myapp
       - name: Checking downloaded files
         run: |
           echo "Downloaded App files for ${{ env.app-name }}"
