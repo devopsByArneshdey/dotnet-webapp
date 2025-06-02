@@ -36,7 +36,7 @@ jobs:
     needs: build-create
     env:
      # package_name: net-app-${{ runner.os }}
-      package_name: net-app-linux
+      package_name: net-app-Linux
       app-name: myapp1
       deployment-slot: Production
     steps:
