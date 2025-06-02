@@ -37,6 +37,6 @@ jobs:
     
     uses: devopsByArneshdey/Actions-Practice_Repo/.github/workflows/resusable-buildtest.yml@shared-wfl
     with:
-      package_name: dotnet-app
+      package-name: dotnet-app
       app-name: myapp1
       deployment-slot: development-phase
