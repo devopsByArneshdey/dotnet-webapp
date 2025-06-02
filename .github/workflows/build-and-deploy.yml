@@ -10,16 +10,14 @@ jobs:
   build-create:
    runs-on: ubuntu-latest
    steps:
-    - name: checkout-repository
+    - name: check repo
     - uses: actions/checkout@v4
       with: 
-        fetch-depth: 0 #to get all tags
-    - name: docker OR dontainer setup
+          fetch-depth: 0 #to get all tags
+    - name: docker build
     - uses: docker/setup-buildx-action@v3
     - run: docker buildx version
     - run: docker buildx list
-    
-    
     
     
       
