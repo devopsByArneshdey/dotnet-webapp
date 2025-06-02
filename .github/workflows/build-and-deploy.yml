@@ -36,6 +36,7 @@ jobs:
     needs: build-create
     env:
      # package_name: net-app-${{ runner.os }}
+      package_name: net-app-linux
       app-name: myapp1
       deployment-slot: Production
     steps:
@@ -46,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           # Artifact name
-          name: ${{ steps.vars.outputs.package_name}}
+          name: ${{ env.package_name}}
           path: ${{ env.DOTNET_ROOT }}/myapp
       - name: Checking downloaded files
         run: |
