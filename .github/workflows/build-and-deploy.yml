@@ -27,5 +27,5 @@ jobs:
        uses: actions/upload-artifact@v4
        with:
           # Artifact name
-          name: .net-app
+          name: net-app-${{ runner.os }}
           path: ${{env.DOTNET_ROOT}}/myapp
