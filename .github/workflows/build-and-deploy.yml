@@ -29,3 +29,21 @@ jobs:
           # Artifact name
           name: net-app-${{ runner.os }}
           path: ${{env.DOTNET_ROOT}}/myapp
+  build-deploy:
+    runs-on: ubuntu-latest
+    needs: build-create
+    env:
+      package_name: net-app-${{ runner.os }}
+      app-name: myapp1
+      deployment-slot: Production
+    steps:
+      - name: Download Artifact for build job
+        uses: actions/download-artifact@v4
+        with:
+          # Artifact name
+          name: ${{ env.package_name}}
+          path: ${{env.DOTNET_ROOT}}/myapp
+      - name: Checking downloaded files
+        run: |
+          echo "Downloaded App files for ${{ env.app-name }}"
+          run: ls -la ${{env.DOTNET_ROOT}}/myapp
