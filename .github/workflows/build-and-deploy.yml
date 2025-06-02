@@ -51,4 +51,4 @@ jobs:
       - name: Checking downloaded files
         run: |
           echo "Downloaded App files for ${{ env.app-name }}"
-          run: ls -la ${{env.DOTNET_ROOT}}/myapp
+          run: ls -la 
