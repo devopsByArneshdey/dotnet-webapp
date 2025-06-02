@@ -1,0 +1,45 @@
+name: build-deploy-dotnet
+on: 
+  push:
+   paths:
+     - ".github/workflows/build-and-deploy.yml"
+     - "./demo-app/**"
+  workflow_dispatch: #Manual_Trigger
+permissions:
+  contents: read 
+
+jobs:
+  build-create:
+   runs-on: ubuntu-latest
+   defaults:
+    run: 
+      working-directory: ./demo-app
+   steps:
+     - name: check repository
+       uses: actions/checkout@v4.1.7
+     - name: setup dotnet core
+       uses: actions/setup-dotnet@v4.0.1
+       with:
+         dotnet-version: '9.x'
+     - name: Build Code
+       run: dotnet build --configuration Release
+     - name: Publish Code
+       run: dotnet publish -c Release --property:PublishDir="${{env.DOTNET_ROOT}}/myapp"
+     - name: Upload Artifact
+       uses: actions/upload-artifact@v4
+       with:
+          # Artifact name
+          name: net-app-${{ runner.os }}
+          path: ${{env.DOTNET_ROOT}}/myapp
+  call-resusable-build-deploy:
+    needs: build-create
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set package_name variable
+        id: vars
+        run: echo "package_name=net-app-${{ runner.os }}" >> $GITHUB_OUTPUT
+      - uses: devopsByArneshdey/Actions-Practice_Repo/.github/workflows/resusable-buildtest.yml@shared-wfl
+        with:
+         package_name: ${{ steps.vars.outputs.package_name }}
+         app-name: myapp1
+         deployment-slot: development-phase
