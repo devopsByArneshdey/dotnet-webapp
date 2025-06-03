@@ -29,7 +29,7 @@ jobs:
        uses: actions/upload-artifact@v4
        with:
           # Artifact name
-          name: net-app-${{ runner.os }}
+          name: dotnet-app
           path: ${{env.DOTNET_ROOT}}/myapp
   build-deploy:
     runs-on: ubuntu-latest
@@ -39,14 +39,11 @@ jobs:
       app-name: myapp1
       deployment-slot: Production
     steps:
-      - name: Set package_name variable
-        id: vars
-        run: echo "package_name=net-app-${{ runner.os }}" >> $GITHUB_OUTPUT
       - name: Download Artifact for build job
         uses: actions/download-artifact@v4
         with:
           # Artifact name
-          name: ${{ steps.vars.outputs.package_name}}
+          name: dotnet-app
       - name: Checking downloaded files
         run: |
           echo "Downloaded App files for ${{ env.app-name }}"
