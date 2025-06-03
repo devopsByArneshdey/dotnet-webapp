@@ -64,19 +64,19 @@ jobs:
       #Initialize Terraform
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform
+        working-directory: terraform
 
       #Terraform Plan
       - name: Terraform Plan
         run: terraform plan -out=tfplan
-        working-directory: ./terraform
+        working-directory: terraform
 
       #Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        working-directory: ./terraform
+        working-directory: terraform
 
      #Output API Gateway URL
       - name: Output API URL
         run: terraform output api_url
-        working-directory: ./terraform
+        working-directory: terraform
