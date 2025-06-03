@@ -48,7 +48,12 @@ jobs:
           echo "Downloaded App files for ${{ env.app-name }}"
           pwd
           ls -la
+
       - uses: actions/checkout@v4.1.7
+      - run: |
+          echo "Current Directory"
+          pwd
+          ls -la
       #Configure AWS Credentials
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
